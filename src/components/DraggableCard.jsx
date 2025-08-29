@@ -1,15 +1,12 @@
 // src/components/DraggableCard.jsx
 import React from 'react'
 import Draggable from 'react-draggable'
-import { motion } from 'framer-motion'
 
-// Yüzer kart — güvenilir sürükleme:
-// - defaultPosition: kontrolsüz mod (sorunsuz drag)
-// - bounds="parent": viewport konteynerinin dışına taşımaz
-// - handle=".drag-handle": başlık çubuğundan sürüklenir (net davranış)
-// - cancel="button, ...": buton/inputs tıklaması drag'i bozmaz
+// Framer Motion yok; react-draggable tek başına transform'u yönetiyor.
+// Kart genişliği 440px'e çekildi ki 3 sütun rahat sığsın.
 export default function DraggableCard({ id, children, title, right, onAnyDrag, defaultPos }) {
   const storageKey = `pos:${id}`
+
   const [initialPos] = React.useState(() => {
     try { return JSON.parse(localStorage.getItem(storageKey)) || defaultPos || { x: 24, y: 120 } }
     catch { return defaultPos || { x: 24, y: 120 } }
@@ -32,20 +29,19 @@ export default function DraggableCard({ id, children, title, right, onAnyDrag, d
       handle=".drag-handle"
       cancel="button, a, input, textarea, select, [data-cancel-drag]"
     >
-      <motion.div
+      <div
         ref={nodeRef}
         className="absolute select-none z-30"
-        initial={{ scale: .98, opacity: .95 }}
-        animate={{ scale: 1, opacity: 1 }}
+        style={{ willChange: 'transform' }}
       >
-        <div className="w-[min(92vw,480px)] bg-zinc-900/70 backdrop-blur border border-zinc-800 rounded-2xl shadow-2xl toxic-border">
+        <div className="w-[min(92vw,440px)] bg-zinc-900/70 backdrop-blur border border-zinc-800 rounded-2xl shadow-2xl toxic-border">
           <div className="drag-handle cursor-move px-4 py-2 flex items-center justify-between border-b border-zinc-800">
             <div className="text-zinc-200 font-semibold">{title}</div>
             <div className="text-xs text-zinc-500">{right}</div>
           </div>
           <div className="p-4">{children}</div>
         </div>
-      </motion.div>
+      </div>
     </Draggable>
   )
 }

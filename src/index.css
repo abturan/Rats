@@ -36,3 +36,24 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 .placeholder{
   border: 1.5px dashed rgba(255,255,255,0.25); border-radius: 12px; padding: 10px; text-align:center; color:#a1a1aa;
 }
+
+.hud-pill{
+  pointer-events:auto;
+  display:flex; align-items:center;
+  padding:8px 12px; border-radius:999px;
+  background: rgba(24,24,27,.85);
+  border:1px solid rgba(63,63,70,.9);
+  box-shadow: 0 0 18px rgba(57,255,20,0.08) inset, 0 2px 8px rgba(0,0,0,.4);
+  backdrop-filter: blur(6px);
+}
+@keyframes glowGreen{0%{box-shadow:0 0 0 rgba(16,185,129,0)}50%{box-shadow:0 0 24px rgba(16,185,129,.55)}100%{box-shadow:0 0 0 rgba(16,185,129,0)}}
+@keyframes glowRed{0%{box-shadow:0 0 0 rgba(239,68,68,0)}50%{box-shadow:0 0 24px rgba(239,68,68,.55)}100%{box-shadow:0 0 0 rgba(239,68,68,0)}}
+.hud-pulse-green{ animation: glowGreen .6s ease }
+.hud-pulse-red{ animation: glowRed .6s ease }
+
+/* küçük tooltip rozetleri */
+.tooltip-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:2px 8px; border-radius:999px; border-width:1px;
+  background:rgba(24,24,27,.6); color:#e4e4e7;
+}
