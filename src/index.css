@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: smooth fonts */
+html, body, #root { height: 100%; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* === Toxic / VHS theme additions === */
+:root{
+  --toxic: #39ff14;
+  --toxic-2: #9cff00;
+  --vhs-pink: #ff00e1;
+  --vhs-blue: #00fff5;
+  --vhs-noise: rgba(57,255,20,0.08);
+}
+.crt {
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4)), repeating-linear-gradient(0deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 2px, transparent 2px, transparent 4px);
+  text-shadow: 0 0 6px var(--toxic);
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  opacity: .6; pointer-events: none;
+}
+.glitch::before { transform: translate(1px,0); filter: drop-shadow(0 0 4px var(--vhs-blue)); mix-blend-mode: screen; }
+.glitch::after { transform: translate(-1px,0); filter: drop-shadow(0 0 4px var(--vhs-pink)); mix-blend-mode: screen; }
+@keyframes cursor-blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+.cursor { animation: cursor-blink 1s steps(1,end) infinite; }
+.scanlines::before{
+  content:''; position: absolute; inset:0; pointer-events:none;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0px, rgba(255,255,255,.04) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: soft-light;
+}
+.toxic-border{ box-shadow: 0 0 0 1px rgba(57,255,20,0.3), 0 0 18px rgba(57,255,20,0.15) inset; }
+.placeholder{
+  border: 1.5px dashed rgba(255,255,255,0.25); border-radius: 12px; padding: 10px; text-align:center; color:#a1a1aa;
+}
